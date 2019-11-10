@@ -30,6 +30,7 @@
         <GroupBox Header="Image" Height="520" Canvas.Left="285" Canvas.Top="45" Width="505">
             <Canvas Margin="10,40,10.,10.">
                 <Image x:Name="pictureBox" Height="442" Width="473" Stretch="Fill"/>
+                <Label x:Name="lblSelectFileName" Content="" Canvas.Top="-35" Width="473"/>
             </Canvas>
         </GroupBox>
         <ProgressBar x:Name="progressBar" Height="20" Canvas.Left="10" Canvas.Top="573" Width="780"/>

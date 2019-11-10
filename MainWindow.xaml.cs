@@ -80,6 +80,8 @@ namespace ScaleNearestNeighborWpfCSharp
                 pictureBox.Source = null;
                 m_strOpenFileName = openFileDlg.FileName;
                 pictureBox.Source = CreateImage(m_strOpenFileName);
+                lblSelectFileName.Content = m_strOpenFileName;
+                m_scaleImgProc.Init();
             }
 
             return;

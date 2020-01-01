@@ -27,6 +27,9 @@ namespace ScaleNearestNeighborWpfCSharp
         private ScaleNearestNeighbor m_scaleImgProc;
         private CancellationTokenSource m_tokenSource;
 
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
@@ -37,6 +40,11 @@ namespace ScaleNearestNeighborWpfCSharp
             btnSaveImage.IsEnabled = false;
         }
 
+        /// <summary>
+        /// タイトルバーマウスダウンのクリックイベント
+        /// </summary>
+        /// <param name="sender">オブジェクト</param>
+        /// <param name="e">マウスボタンイベントのデータ</param>
         private void OnMouseDownLblTitle(object sender, MouseButtonEventArgs e)
         {
             if ((e.ChangedButton == MouseButton.Left) && e.ButtonState == MouseButtonState.Pressed)
@@ -47,6 +55,11 @@ namespace ScaleNearestNeighborWpfCSharp
             return;
         }
 
+        /// <summary>
+        /// タイトルバーマウスムーブのクリックイベント
+        /// </summary>
+        /// <param name="sender">オブジェクト</param>
+        /// <param name="e">マウスイベントのデータ</param>
         private void OnMouseMoveLblTitle(object sender, MouseEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
@@ -59,6 +72,11 @@ namespace ScaleNearestNeighborWpfCSharp
             return;
         }
 
+        /// <summary>
+        /// ダイアログの表示
+        /// </summary>
+        /// <param name="_strFileName">ファイル名称</param>
+        /// <returns>ビットマップイメージ</returns>
         public BitmapImage CreateImage(string _strFileName)
         {
             var bitmap = new BitmapImage();
@@ -70,6 +88,11 @@ namespace ScaleNearestNeighborWpfCSharp
             return bitmap;
         }
 
+        /// <summary>
+        /// ファイル選択ボタンのクリックイベント
+        /// </summary>
+        /// <param name="sender">オブジェクト</param>
+        /// <param name="e">ルーティングイベントのデータ</param>
         private void OnClickBtnFileSelect(object sender, RoutedEventArgs e)
         {
             ComOpenFileDialog openFileDlg = new ComOpenFileDialog();
@@ -87,6 +110,11 @@ namespace ScaleNearestNeighborWpfCSharp
             return;
         }
 
+        /// <summary>
+        /// イメージの保存ボタンのクリックイベント
+        /// </summary>
+        /// <param name="sender">オブジェクト</param>
+        /// <param name="e">ルーティングイベントのデータ</param>
         private void OnClickBtnSaveImage(object sender, RoutedEventArgs e)
         {
             ComSaveFileDialog saveDialog = new ComSaveFileDialog();
@@ -115,6 +143,11 @@ namespace ScaleNearestNeighborWpfCSharp
             }
         }
 
+        /// <summary>
+        /// 初期化ボタンのクリックイベント
+        /// </summary>
+        /// <param name="sender">オブジェクト</param>
+        /// <param name="e">ルーティングイベントのデータ</param>
         private void OnClickBtnInit(object sender, RoutedEventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(m_strOpenFileName))
@@ -125,6 +158,11 @@ namespace ScaleNearestNeighborWpfCSharp
             btnSaveImage.IsEnabled = false;
         }
 
+        /// <summary>
+        /// 閉じるボタンのクリックイベント
+        /// </summary>
+        /// <param name="sender">オブジェクト</param>
+        /// <param name="e">ルーティングイベントのデータ</param>
         private void OnClickBtnClose(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show(this, "Close the application ?", "Question", MessageBoxButton.OKCancel, MessageBoxImage.Exclamation);
@@ -136,6 +174,11 @@ namespace ScaleNearestNeighborWpfCSharp
             return;
         }
 
+        /// <summary>
+        /// スケールスライダの値変化のイベント
+        /// </summary>
+        /// <param name="sender">オブジェクト</param>
+        /// <param name="e">ルーティングプロパティのチェンジイベントのデータ</param>
         private void OnValueChangedSliderScale(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (labelValue != null)
@@ -146,6 +189,11 @@ namespace ScaleNearestNeighborWpfCSharp
             return;
         }
 
+        /// <summary>
+        /// 最近傍補間法実行ボタンのクリックイベント
+        /// </summary>
+        /// <param name="sender">オブジェクト</param>
+        /// <param name="e">ルーティングイベントのデータ</param>
         private async void OnClickBtnGo(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(m_strOpenFileName))
@@ -192,6 +240,11 @@ namespace ScaleNearestNeighborWpfCSharp
             return;
         }
 
+        /// <summary>
+        /// 画像処理実行用のタスク
+        /// </summary>
+        /// /// <param name="_bitmap">ビットマップイメージ</param>
+        /// <returns>画像処理の実行結果 成功/失敗</returns>
         private async Task<bool> TaskWorkImageProcessing(BitmapImage _bitmap)
         {
             m_tokenSource = new CancellationTokenSource();
@@ -212,6 +265,11 @@ namespace ScaleNearestNeighborWpfCSharp
             return bRst;
         }
 
+        /// <summary>
+        /// 最小化ボタンのクリックイベント
+        /// </summary>
+        /// <param name="sender">オブジェクト</param>
+        /// <param name="e">ルーティングイベントのデータ</param>
         private void OnClickBtnMinimizedIcon(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;

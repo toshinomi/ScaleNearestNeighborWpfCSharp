@@ -9,33 +9,64 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
+/// <summary>
+/// 最近傍補間法のロジック
+/// </summary>
 class ScaleNearestNeighbor
 {
     private WriteableBitmap m_bitmap;
     private ProgressBar m_progressBar;
+
+    /// <summary>
+    /// Writeableなビットマップ
+    /// </summary>
     public WriteableBitmap bitmap
     {
         get { return (WriteableBitmap)m_bitmap.Clone(); }
     }
+
+    /// <summary>
+    /// プログレスバー
+    /// </summary>
     public ProgressBar progressBar
     {
         set { m_progressBar = value; }
     }
 
+    /// <summary>
+    /// コンストラクタ
+    /// </summary>
+    /// <param name="_progressBar">プログレスバー</param>
     public ScaleNearestNeighbor(ProgressBar _progressBar)
     {
         m_progressBar = _progressBar;
     }
 
+    /// <summary>
+    /// デスクトラクタ
+    /// </summary>
     ~ScaleNearestNeighbor()
     {
     }
 
+    /// <summary>
+    /// 初期化
+    /// </summary>
     public void Init()
     {
         m_bitmap = null;
     }
 
+    /// <summary>
+    /// 最近傍補間法の実行
+    /// </summary>
+    /// <param name="_bitmap">ビットマップ</param>
+    /// <param name="_fScale">スケール</param>
+    /// <param name="_token">キャンセルトークン</param>
+    /// <param name="_window">ウィンドウ</param>
+    /// <param name="_dDpiX">DPI X</param>
+    /// <param name="_dDpiY">DPI Y</param>
+    /// <returns>実行結果 成功/失敗</returns>
     public bool GoImgProc(BitmapImage _bitmap, float _fScale, CancellationToken _token, Window _window, double _dDpiX, double _dDpiY)
     {
         bool bRst = true;
@@ -101,6 +132,10 @@ class ScaleNearestNeighbor
         return bRst;
     }
 
+    /// <summary>
+    /// プログレスバーの設定
+    /// </summary>
+    /// <param name="_nCount">カウント</param>
     private void SetProgressBar(int _nCount)
     {
         m_progressBar.Value = _nCount;
